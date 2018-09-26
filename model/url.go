@@ -1,9 +1,16 @@
-package url
+package model
 
 import (
+	"github.com/jinzhu/gorm"
 	"math/rand"
 	"time"
 )
+
+type Link struct {
+	gorm.Model
+	Url          string `json:"url"`
+	ShortenedUrl string `json:"shortened_url"`
+}
 
 func CodeGenerator(size int) string {
 	var letters = [...]string{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",

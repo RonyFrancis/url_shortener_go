@@ -13,7 +13,7 @@ type Response struct {
 }
 
 func AddUrlHandler(w http.ResponseWriter, r *http.Request) {
-	shorten := url.CodeGenerator(8)
+	shorten := model.CodeGenerator(8)
 	response := Response{StatusCode: "200", ShortenedUrl: shorten}
 	json.NewEncoder(w).Encode(response)
 }
