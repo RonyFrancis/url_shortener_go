@@ -6,7 +6,7 @@ import (
 )
 
 func CodeGenerator(size int) string {
-	var letters = [...]string{"A", "Bsdd", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
+	var letters = [...]string{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
 		"N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "0", "1", "2", "3", "4",
 		"5", "6", "7", "8", "9"}
 	var shorten string
