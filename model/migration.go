@@ -5,6 +5,7 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
+// InitalMigration run the migrations
 func InitalMigration() {
 	fmt.Println("Migration started")
 

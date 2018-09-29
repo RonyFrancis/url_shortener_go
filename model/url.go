@@ -7,12 +7,15 @@ import (
 	"time"
 )
 
+// Link Table
 type Link struct {
 	gorm.Model
-	Url          string `json:"url"`
-	ShortenedUrl string `json:"shortened_url"`
+	URL          string `json:"url"`
+	ShortenedURL string `json:"shortened_url"`
 }
 
+// CodeGenerator generates 8 character code or
+// retrieve code from database
 func CodeGenerator(size int, url string) string {
 	var letters = [...]string{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
 		"N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "0", "1", "2", "3", "4",
@@ -40,11 +43,11 @@ func CodeGenerator(size int, url string) string {
 		for i := 0; i <= size; i++ {
 			shorten += letters[rand.Intn(len(letters))]
 		}
-		link = Link{Url: url, ShortenedUrl: shorten}
+		link = Link{URL: url, ShortenedURL: shorten}
 		db.NewRecord(link)
 		db.Create(&link)
 	} else {
-		shorten = link.ShortenedUrl
+		shorten = link.ShortenedURL
 	}
 	return shorten
 }
