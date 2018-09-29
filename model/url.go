@@ -14,6 +14,12 @@ type Link struct {
 	ShortenedURL string `json:"shortened_url"`
 }
 
+// LinkURL fetch urls
+type LinkURL struct {
+	URL          string `json:"url"`
+	ShortenedURL string `json:"shortened_url"`
+}
+
 // CodeGenerator generates 8 character code or
 // retrieve code from database
 func CodeGenerator(size int, url string) string {
@@ -50,4 +56,18 @@ func CodeGenerator(size int, url string) string {
 		shorten = link.ShortenedURL
 	}
 	return shorten
+}
+
+// Geturls fetch all url from database
+func Geturls() []LinkURL {
+	db, err := gorm.Open("sqlite3", "db/test.db")
+	if err != nil {
+		fmt.Println(err.Error())
+		panic("failed to connect database")
+	}
+	defer db.Close()
+
+	var urls []LinkURL
+	db.Raw("SELECT url,shortened_url FROM links").Scan(&urls)
+	return urls
 }

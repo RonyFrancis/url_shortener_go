@@ -13,6 +13,7 @@ func main() {
 	myRouter := mux.NewRouter()
 	model.InitalMigration()
 	myRouter.HandleFunc("/shortenUrl", shortener.AddURLHandler)
+	myRouter.HandleFunc("/getAllUrls", shortener.GetAllUrls)
 	myRouter.Methods("POST")
 	http.ListenAndServe(":8001", myRouter)
 }
