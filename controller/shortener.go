@@ -2,9 +2,9 @@ package shortener
 
 import (
 	"encoding/json"
-	"net/http"
-
 	"github.com/RonyFrancis/url_shortener_go/model"
+	"github.com/gorilla/mux"
+	"net/http"
 )
 
 // Response json struct
@@ -33,4 +33,11 @@ func AddURLHandler(w http.ResponseWriter, r *http.Request) {
 func GetAllUrls(w http.ResponseWriter, r *http.Request) {
 	response := GetAllURLResponse{StatusCode: "200", URLS: model.Geturls()}
 	json.NewEncoder(w).Encode(response)
+}
+
+// RedirectURL redirect to original url
+func RedirectURL(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	url := model.GetoriURL(vars["url"])
+	http.Redirect(w, r, url, http.StatusSeeOther)
 }

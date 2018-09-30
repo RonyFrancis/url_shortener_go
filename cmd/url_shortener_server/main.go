@@ -12,8 +12,8 @@ import (
 func main() {
 	myRouter := mux.NewRouter()
 	model.InitalMigration()
-	myRouter.HandleFunc("/shortenUrl", shortener.AddURLHandler)
-	myRouter.HandleFunc("/getAllUrls", shortener.GetAllUrls)
-	myRouter.Methods("POST")
+	myRouter.HandleFunc("/shortenUrl", shortener.AddURLHandler).Methods("POST")
+	myRouter.HandleFunc("/getAllUrls", shortener.GetAllUrls).Methods("POST")
+	myRouter.HandleFunc("/redirectUrls/{url}", shortener.RedirectURL).Methods("GET")
 	http.ListenAndServe(":8001", myRouter)
 }

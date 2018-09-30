@@ -71,3 +71,16 @@ func Geturls() []LinkURL {
 	db.Raw("SELECT url,shortened_url FROM links").Scan(&urls)
 	return urls
 }
+
+// GetoriURL fetch original url from shortened url
+func GetoriURL(url string) string {
+	db, err := gorm.Open("sqlite3", "db/test.db")
+	if err != nil {
+		fmt.Println(err.Error())
+		panic("failed to connect database")
+	}
+	defer db.Close()
+	var link Link
+	db.Raw("SELECT * FROM links where shortened_url = ?", url).Scan(&link)
+	return link.URL
+}
